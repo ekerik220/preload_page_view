@@ -17,7 +17,7 @@ import 'package:flutter/widgets.dart';
 /// See also:
 ///
 ///  * [PreloadPageView], which is the widget this object controls.
-class PreloadPageController extends ScrollController {
+class PreloadPageController extends PageController {
   /// Creates a page controller.
   ///
   /// The [initialPage], [keepPage], and [viewportFraction] arguments must not be null.
@@ -70,6 +70,7 @@ class PreloadPageController extends ScrollController {
   ///
   /// The [hasClients] property can be used to check if a [PreloadPageView] is attached
   /// prior to accessing [page].
+  @override
   double? get page {
     assert(
       positions.isNotEmpty,
@@ -90,6 +91,7 @@ class PreloadPageController extends ScrollController {
   /// The returned [Future] resolves when the animation completes.
   ///
   /// The `duration` and `curve` arguments must not be null.
+  @override
   Future<void> animateToPage(
     int page, {
     required Duration duration,
@@ -107,6 +109,7 @@ class PreloadPageController extends ScrollController {
   ///
   /// Jumps the page position from its current value to the given value,
   /// without animation, and without checking if the new value is in range.
+  @override
   void jumpToPage(int page) {
     final _PagePosition position = this.position as _PagePosition;
     position.jumpTo(position.getPixelsFromPage(page.toDouble()));
@@ -118,6 +121,7 @@ class PreloadPageController extends ScrollController {
   /// The returned [Future] resolves when the animation completes.
   ///
   /// The `duration` and `curve` arguments must not be null.
+  @override
   Future<void> nextPage({required Duration duration, required Curve curve}) {
     return animateToPage(page!.round() + 1, duration: duration, curve: curve);
   }
@@ -128,6 +132,7 @@ class PreloadPageController extends ScrollController {
   /// The returned [Future] resolves when the animation completes.
   ///
   /// The `duration` and `curve` arguments must not be null.
+  @override
   Future<void> previousPage(
       {required Duration duration, required Curve curve}) {
     return animateToPage(page!.round() - 1, duration: duration, curve: curve);
